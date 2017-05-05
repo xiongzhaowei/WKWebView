@@ -12,7 +12,10 @@
 @implementation NAME(BaseWebViewController) (UIDelegate)
 
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
-    return self.webView;
+    if (navigationAction.targetFrame == nil) {
+        [webView loadRequest:navigationAction.request];
+    }
+    return nil;
 }
 
 - (void)webViewDidClose:(WKWebView *)webView {
